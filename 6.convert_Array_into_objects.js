@@ -4,7 +4,7 @@ function covertArrayIntoObject(userInput) {
 
     if (!Array.isArray(userInput)) {
         console.error("Invalid Input");
-        return '';
+        return null;
     }
 
     let resultObject = {};
@@ -28,4 +28,5 @@ console.log(covertArrayIntoObject([['name', 'arun'], ['age', 39]]))
 
 console.log(covertArrayIntoObject([['name', 'arun', 'jhon'], ['age', 39]]))
 console.log(covertArrayIntoObject([[null, "sam"], ['age', 39]]))
+
 console.log(covertArrayIntoObject([['name', undefined], ['age', 39]]))
