@@ -16,7 +16,7 @@ function mergeValues(userInput) {
       for (let j = 0; j < values.length; j++) {
         if (!Array.isArray(result[key]) || typeof values[j] !== "string") {
           console.error("invalid");
-          return [];
+          return {};
         }
 
         let index = result[key].length;
@@ -39,3 +39,4 @@ let userInput = [
 ];
 
 console.log(mergeValues(userInput));
+
