@@ -4,14 +4,14 @@
 function countStrings(userInput) {
     if (!Array.isArray(userInput)) {
         console.error("Input Invalid");
-        return '';
+        return {};
     }
     let resultObject = {};
 
     for (let i = 0; i < userInput.length; i++) {
         if (userInput[i] === null || userInput[i] === undefined) {
             console.log("Invalid Values");
-            return [];
+            return {};
         }
 
         if (!(userInput[i] in resultObject)) {
@@ -25,4 +25,5 @@ function countStrings(userInput) {
 console.log(countStrings(['a', 'b', 'c', 'c', 'b', 'a', 'd', "b"]))
 console.log(countStrings([100, 'a', 'b', 'c', 'c', 'b', 'a', 'd']))
 console.log(countStrings(['a', 'b', 'c', 'c', null, "b"]))
+
 console.log(countStrings("hello"))
