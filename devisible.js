@@ -5,7 +5,6 @@
 function findIsDivisible(inputArray, targetNumber) {
 
     if (!Array.isArray(inputArray) ||
-        inputArray.length !== 2 ||
         typeof targetNumber !== 'number' ||
         typeof inputArray[0] !== 'number' ||
         typeof inputArray[1] !== 'number') {
@@ -42,4 +41,5 @@ function findIsDivisible(inputArray, targetNumber) {
 // console.log(findIsDivisible([2, 6], 120))
 // console.log(findIsDivisible([1, 5], 15))
 // console.log(findIsDivisible([1, 5], "hi"))
+
 // console.log(findIsDivisible(["good", 5], "hi"))
