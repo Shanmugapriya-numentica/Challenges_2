@@ -3,7 +3,7 @@ function findHighestSalary(userInputArray) {
 
     if (!Array.isArray(userInputArray) || userInputArray.length === 0) {
         console.error("Invalid input!");
-        return '';
+        return {};
     }
 
     for (let i = 0; i < userInputArray.length; i++) {
@@ -17,7 +17,7 @@ function findHighestSalary(userInputArray) {
             currentValue.salary < 0
         ) {
             console.error("Invalid Input");
-            return '';
+            return {};
         }
 
         if (!(dept in result)) {
@@ -57,3 +57,4 @@ const employees = [
 ];
 
 console.log(findHighestSalary(employees));
+
