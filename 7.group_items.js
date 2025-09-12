@@ -1,4 +1,5 @@
 function groupMultiples(userInput) {
+    
     if (!Array.isArray(userInput)) {
         console.error("Invalid Input");
         return [];
@@ -34,4 +35,5 @@ function groupMultiples(userInput) {
 console.log(groupMultiples([34, 12, 10, 15, 7, 21, 81]));
 // console.log(groupMultiples([34, 12, 10, 15, 7, 21, 81, "hello"]));
 // console.log(groupMultiples([34, 12, 10, 15, 7, 21, undefined]));
+
 // console.log(groupMultiples("hello"));
