@@ -1,6 +1,8 @@
 function groupByUserId(userInputArray) {
+
     if (!Array.isArray(userInputArray)) {
         console.error("Invalid Input");
+        return [];
     }
 
     let result = {};
@@ -13,7 +15,7 @@ function groupByUserId(userInputArray) {
             userId === undefined || amount === undefined || category === undefined || currency === undefined ||
             typeof amount !== 'number' || typeof category !== 'string') {
             console.error("Invalid Input");
-            return '';
+            return [];
         }
 
         if (!result[userId]) {
@@ -54,4 +56,5 @@ let inputArray = [
     { id: "t3", userId: 102, category: "food", amount: 60.00, currency: "INR", ts: "2025-08-02T07:05:00Z" },
     { id: "t4", userId: 101, category: "food", amount: -20.00, currency: "INR", ts: "2025-08-03T10:00:00Z" } // refund
 ];
+
 console.log(groupByUserId(inputArray))
