@@ -117,7 +117,9 @@ class TodosDetails {
         for (let i = 0; i < this.todos.length; i++) {
             const task = this.todos[i];
 
-            if (task.status.toLowerCase() === 'done') continue;
+            if (task.status.toLowerCase() === 'done') {
+                continue;
+            }
 
             let personName = "Unassigned";
             for (let j = 0; j < this.people.length; j++) {
@@ -195,7 +197,9 @@ class TodosDetails {
         workLoads["unassigned"] = 0;
 
         for (const task of this.todos) {
-            if (task.status.toLowerCase() === "done") continue;
+            if (task.status.toLowerCase() === "done") {
+                continue;
+            }
 
             let assigneeId;
             if (task.assigneeId) {
@@ -283,7 +287,7 @@ class TodosDetails {
                     === title.trim(' ').replace(/\s+/g, ' ').toLowerCase()
                     && this.todos[j].id !== taskId) {
                     titleWithIds[title].push(this.todos[j].id)
-                    
+
                 }
             }
         }
@@ -297,7 +301,68 @@ class TodosDetails {
         }
         return sharedTitles;
     }
-    
+
+    findPriority() {
+        const priorityRank = {
+            high: 3,
+            medium: 2,
+            low: 1
+        };
+
+        const capacityById = {};
+        for (let p of this.people) {
+            capacityById[p.id] = p.capacityHrsPerDay;
+        }
+
+        const statusById = {};
+        for (let task of this.todos) {
+            statusById[task.id] = task.status;
+        }
+
+        const today = new Date("2025-09-15");
+
+        const readyTasks = this.todos.filter(task => {
+            if (task.status === "done" || task.status === "blocked") return false;
+
+            const dueDate = new Date(task.due);
+            if (dueDate <= today) return false;
+
+            let deps;
+            if (task.dependsOn) {
+                deps = task.dependsOn;
+            } else {
+                deps = [];
+            }
+            for (let depId of deps) {
+                if (!(depId in statusById) || statusById[depId] !== "done") {
+                    return false;
+                }
+            }
+
+            if (task.assigneeId && capacityById[task.assigneeId] === 0) {
+                return false;
+            }
+
+            return true;
+        });
+
+        readyTasks.sort((a, b) => {
+            const p1 = priorityRank[a.priority];
+            const p2 = priorityRank[b.priority];
+
+            if (p1 !== p2) return p2 - p1;
+
+            const d1 = new Date(a.due);
+            const d2 = new Date(b.due);
+            if (d1.getTime() !== d2.getTime()) return d1 - d2;
+
+            return a.estimateHrs - b.estimateHrs;
+        });
+
+        return readyTasks.map(task => task.id);
+
+    }
+
     //9
     reassignment() {
         const personHrsDetails = {};
@@ -367,5 +432,6 @@ console.log(obj.detectDependency());                        //10
 // console.log(obj.getWorkloadCapacity());                //5
 // console.log(obj.FindTasksDependsOnNonExistents())     //6
 // console.log(obj.findSharedTitles());                 //7
-// console.log(obj.reassignment());                    //9
+// console.log(obj.findPriority());                    //8
+// console.log(obj.reassignment());                   //9
 
