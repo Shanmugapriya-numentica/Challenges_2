@@ -56,13 +56,17 @@ function getBestDiscountsTransactionsDetails(UserInput) {
                                     if (discountAmt > couponArray[j].maxDiscount) { discountAmt = couponArray[j].maxDiscount; }
                                 }
                             }
+                            else {
+                                result.push({
+                                    "txId": currentTransaction.id, "chosenCoupon": "N/A", "dsic": 0, "payable": currentTransaction.amount
+                                })
+                            }
                         }
                     }
                     if (BestDiscountAmt < discountAmt) {
                         BestDiscountAmt = discountAmt;
                         BestCouponName = couponsArrayOfTrans[i];
                     }
-
                 }
 
                 for (let j = 0; j < couponArray.length; j++) {
@@ -99,7 +103,13 @@ function getBestDiscountsTransactionsDetails(UserInput) {
                 }
             }
         }
+        else {
+            result.push({
+                "txId": currentTransaction.id, "chosenCoupon": "N/A", "dsic": 0, "payable": currentTransaction.amount
+            })
+        }
     } return result;
 }
 
 console.log(getBestDiscountsTransactionsDetails(UserInput));
+
