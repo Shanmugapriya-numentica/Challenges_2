@@ -21,7 +21,7 @@ function getBestDiscountsTransactionsDetails(UserInput) {
             let bestDiscountAmt = 0;
             let discountAmt = 0;
             let netPayable = 0;
-            let BestCouponName = '';
+            let bestCouponName = '';
             if (typeof billAmt !== 'number' || billAmt === null || billAmt === undefined) {
                 console.error("Invalid Input!");
                 return [];
@@ -65,12 +65,12 @@ function getBestDiscountsTransactionsDetails(UserInput) {
                     }
                     if (bestDiscountAmt < discountAmt) {
                         bestDiscountAmt = discountAmt;
-                        BestCouponName = couponsArrayOfTrans[i];
+                        bestCouponName = couponsArrayOfTrans[i];
                     }
                 }
 
                 for (let j = 0; j < couponArray.length; j++) {
-                    if (couponArray[j].code === BestCouponName) {
+                    if (couponArray[j].code === bestCouponName) {
                         const minOrderVal = couponArray[j].minOrder;
                         const transactionDetailsTs = currentTransaction.ts;
 
@@ -96,7 +96,7 @@ function getBestDiscountsTransactionsDetails(UserInput) {
                             }
                             netPayable = currentTransaction.amount - discountAmt;
                             result.push({
-                                "txId": currentTransaction.id, "chosenCoupon": BestCouponName, "dsic": discountAmt, "payable": netPayable
+                                "txId": currentTransaction.id, "chosenCoupon": bestCouponName, "dsic": discountAmt, "payable": netPayable
                             })
                         }
                     }
