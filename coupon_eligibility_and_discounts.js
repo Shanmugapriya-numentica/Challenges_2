@@ -18,7 +18,7 @@ function getBestDiscountsTransactionsDetails(UserInput) {
         if (currentTransaction.status.toLowerCase() === 'success') {  // level 1 ok
             const billAmt = currentTransaction.amount;
             const couponsArrayOfTrans = currentTransaction.couponCodes;
-            let BestDiscountAmt = 0;
+            let bestDiscountAmt = 0;
             let discountAmt = 0;
             let netPayable = 0;
             let BestCouponName = '';
@@ -63,8 +63,8 @@ function getBestDiscountsTransactionsDetails(UserInput) {
                             }
                         }
                     }
-                    if (BestDiscountAmt < discountAmt) {
-                        BestDiscountAmt = discountAmt;
+                    if (bestDiscountAmt < discountAmt) {
+                        bestDiscountAmt = discountAmt;
                         BestCouponName = couponsArrayOfTrans[i];
                     }
                 }
