@@ -30,7 +30,7 @@ function getTicketsAge(UserInput) {
 
             const differenceInHours = Math.round(differenceInMs / (1000 * 60 * 60));
 
-            if (differenceInHours > 40) {
+            if (differenceInHours > 48) {
                 result.push({
                     "ticketId": currentticket.id,
                     "ageHours": differenceInHours,
@@ -50,4 +50,5 @@ function getTicketsAge(UserInput) {
 
 }
 console.log(getTicketsAge(UserInput));
+
 
